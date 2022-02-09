@@ -5,8 +5,8 @@ go 1.16
 require (
 	github.com/HdrHistogram/hdrhistogram-go v1.1.0 // indirect
 	github.com/apache/thrift v0.13.0
-	github.com/bytedance/gopkg v0.0.0-20210709064845-3c00f9323f09
-	github.com/cloudwego/kitex v0.0.1
+	github.com/bytedance/gopkg v0.0.0-20210910103821-e4efae9c17c3
+	github.com/cloudwego/kitex v0.1.4
 	github.com/kitex-contrib/tracer-opentracing v0.0.1
 	github.com/opentracing/opentracing-go v1.2.0
 	github.com/pkg/errors v0.9.1 // indirect
