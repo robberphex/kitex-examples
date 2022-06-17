@@ -17,6 +17,7 @@ package main
 
 import (
 	"context"
+	"github.com/cloudwego/kitex/pkg/rpcinfo"
 	"github.com/cloudwego/kitex/server"
 	"github.com/kitex-contrib/registry-nacos/registry"
 	"log"
@@ -45,7 +46,8 @@ func main() {
 	}
 
 	svr := echo.NewServer(new(EchoImpl),
-		server.WithRegistry(r), // registry
+		server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: "echo"}), // server name
+		server.WithRegistry(r),                                                      // registry
 	)
 	if err := svr.Run(); err != nil {
 		log.Println("server stopped with error:", err)
