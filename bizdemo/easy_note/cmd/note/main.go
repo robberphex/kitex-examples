@@ -45,10 +45,12 @@ func main() {
 	klog.SetLogger(kitexlogrus.NewLogger())
 	klog.SetLevel(klog.LevelDebug)
 
+	// 初始化Nacos注册中心，默认从环境变量读取配置
 	r, err := registry.NewDefaultNacosRegistry()
 	if err != nil {
 		panic(err)
 	}
+	// 接入OpenTelemetry，默认从环境变量配置
 	p := provider.NewOpenTelemetryProvider(
 		provider.WithServiceName(constants.NoteServiceName),
 		provider.WithInsecure(),

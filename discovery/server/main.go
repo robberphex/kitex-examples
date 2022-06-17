@@ -17,6 +17,8 @@ package main
 
 import (
 	"context"
+	"github.com/cloudwego/kitex/server"
+	"github.com/kitex-contrib/registry-nacos/registry"
 	"log"
 
 	"github.com/cloudwego/kitex-examples/kitex_gen/api"
@@ -36,7 +38,15 @@ func (s *EchoImpl) Echo(ctx context.Context, req *api.Request) (resp *api.Respon
 }
 
 func main() {
-	svr := echo.NewServer(new(EchoImpl))
+	// 初始化Nacos注册中心，默认从环境变量读取配置
+	r, err := registry.NewDefaultNacosRegistry()
+	if err != nil {
+		panic(err)
+	}
+
+	svr := echo.NewServer(new(EchoImpl),
+		server.WithRegistry(r), // registry
+	)
 	if err := svr.Run(); err != nil {
 		log.Println("server stopped with error:", err)
 	} else {

@@ -17,17 +17,24 @@ package main
 
 import (
 	"context"
+	"github.com/kitex-contrib/registry-nacos/resolver"
 	"log"
 	"time"
 
-	"github.com/cloudwego/kitex-examples/discovery/p2p"
 	"github.com/cloudwego/kitex-examples/kitex_gen/api"
 	"github.com/cloudwego/kitex-examples/kitex_gen/api/echo"
 	"github.com/cloudwego/kitex/client"
 )
 
 func main() {
-	client, err := echo.NewClient("echo", client.WithResolver(p2p.NewP2PResolver("tcp", ":8888")))
+	r, err := resolver.NewDefaultNacosResolver()
+	if err != nil {
+		panic(err)
+	}
+
+	client, err := echo.NewClient("echo",
+		client.WithResolver(r), // resolver
+	)
 	if err != nil {
 		log.Fatal(err)
 	}

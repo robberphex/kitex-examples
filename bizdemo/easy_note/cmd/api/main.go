@@ -43,7 +43,7 @@ func main() {
 	p := provider.NewOpenTelemetryProvider(
 		provider.WithServiceName(constants.ApiServiceName),
 		provider.WithInsecure(),
-		provider.WithEnableMetrics(false),
+		//provider.WithEnableMetrics(false),
 	)
 	defer p.Shutdown(context.Background())
 
